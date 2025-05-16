@@ -5601,11 +5601,11 @@
         },
         {
             "name": "yourvendor/rolepermissionmodule",
-            "version": "dev-main",
+            "version": "dev-windows",
             "dist": {
                 "type": "path",
                 "url": "../role-permission-module",
-                "reference": "c80be614012b9005fd72a0768524aef6417242e1"
+                "reference": "684ccbd725e600e2023821e252d17617b9cab6cb"
             },
             "type": "library",
             "extra": {
@@ -8157,6 +8157,6 @@
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

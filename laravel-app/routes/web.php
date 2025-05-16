@@ -23,6 +23,9 @@ Route::get('/', function (Root $root) {
 // ---- Start test v1 routes ----
 Route::prefix('v1')->group(function () {
     Route::get('/test-1',[TestController::class,"test1"]);
+
+    //Add new role
+    Route::get('add-role',[TestController::class,'checkRole']);
 });
 
 // ---- End test v1 routes ----

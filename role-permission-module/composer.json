@@ -1,0 +1,20 @@
+{
+    "name": "yourvendor/rolepermissionmodule",
+    "description": "A Role and Permission manement module",
+    "type": "library",
+    "license": "",
+    "autoload": {
+      "psr-4": {
+        "YourVendor\\rolePermissionModule\\": "src/"
+      }
+    },
+    "require": {},
+    "extra": {
+      "laravel": {
+        "providers": [
+          "YourVendor\\rolePermissionModule\\MyPackageServiceProvider"
+        ]
+      }
+    }
+  }
+  

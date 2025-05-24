@@ -26,6 +26,8 @@ Route::prefix('v1')->group(function () {
 
     //Add new role
     Route::get('add-role',[TestController::class,'checkRole']);
+    //list all roles
+    Route::get('/roles-list',[TestController::class,'roleList']);
 });
 
 // ---- End test v1 routes ----

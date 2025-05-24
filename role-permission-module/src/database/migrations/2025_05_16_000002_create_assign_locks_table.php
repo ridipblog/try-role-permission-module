@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('assign_locks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('role_id')
+                ->comment('hold roles table primary id');
+            $table->string('permission_id')
+                ->comment('hold permissions table primary id');
             $table->tinyInteger('status')
-            ->default(1)
-            ->comment('1 for active , 2 for deactive');
+                ->default(1)
+                ->comment('1 for active , 2 for deactive');
             $table->timestamps();
 
             $table->unique([
-                'name',
+                'role_id',
+                'permission_id',
                 'status'
             ]);
         });
@@ -31,6 +35,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('assign_locks');
     }
 };
+// "yourvendor/rolepermissionmodule": "@dev"

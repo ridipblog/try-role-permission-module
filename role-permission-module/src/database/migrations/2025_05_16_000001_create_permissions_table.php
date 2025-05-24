@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->tinyInteger('status')
             ->default(1)
-            ->comment('1 for active , 2 for deactive');
+            ->comment('1 for active, 2 for deactive');
             $table->timestamps();
 
             $table->unique([
@@ -31,6 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('permissions');
     }
 };
+// "yourvendor/rolepermissionmodule": "@dev"

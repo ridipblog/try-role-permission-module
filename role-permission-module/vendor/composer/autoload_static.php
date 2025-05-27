@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit24b98a9c1f92f5ab9f21664a537f4abe
 {
     public static $prefixLengthsPsr4 = array (
-        'Y' => 
+        'B' => 
         array (
-            'YourVendor\\rolePermissionModule\\' => 32,
+            'BugLock\\rolePermissionModule\\' => 29,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'YourVendor\\rolePermissionModule\\' => 
+        'BugLock\\rolePermissionModule\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

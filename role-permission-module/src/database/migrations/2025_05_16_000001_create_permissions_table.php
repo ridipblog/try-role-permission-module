@@ -34,4 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('permissions');
     }
 };
-// "yourvendor/rolepermissionmodule": "@dev"
+// "BugLock/rolepermissionmodule": "@dev"

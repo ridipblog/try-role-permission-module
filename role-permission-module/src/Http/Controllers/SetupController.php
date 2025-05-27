@@ -1,5 +1,5 @@
 <?php
-namespace YourVendor\rolePermissionModule\Http\Controllers;
+namespace BugLock\rolePermissionModule\Http\Controllers;
 
 class SetupController{
     public $role=null;

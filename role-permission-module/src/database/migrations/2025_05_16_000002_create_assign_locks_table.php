@@ -13,14 +13,21 @@ return new class extends Migration
     {
         Schema::create('assign_locks', function (Blueprint $table) {
             $table->id();
-            $table->string('role_id')
+            $table->unsignedBigInteger('role_id')
                 ->comment('hold roles table primary id');
-            $table->string('permission_id')
+            $table->unsignedBigInteger('permission_id')
                 ->comment('hold permissions table primary id');
             $table->tinyInteger('status')
                 ->default(1)
                 ->comment('1 for active , 2 for deactive');
             $table->timestamps();
+
+            $table->foreign('role_id')
+                ->references('id')
+                ->on('roles');
+            $table->foreign('permission_id')
+                ->references('id')
+                ->on('permissions');
 
             $table->unique([
                 'role_id',
@@ -38,4 +45,4 @@ return new class extends Migration
         Schema::dropIfExists('assign_locks');
     }
 };
-// "yourvendor/rolepermissionmodule": "@dev"
+// "BugLock/rolepermissionmodule": "@dev"

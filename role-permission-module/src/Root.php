@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\rolePermissionModule;
+namespace BugLock\rolePermissionModule;
 
 class Root{
     public function check(){

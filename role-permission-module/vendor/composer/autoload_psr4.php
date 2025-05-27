@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'YourVendor\\rolePermissionModule\\' => array($baseDir . '/src'),
+    'BugLock\\rolePermissionModule\\' => array($baseDir . '/src'),
 );

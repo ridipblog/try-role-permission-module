@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace YourVendor\rolePermissionModule\Http\Helpers;
+namespace BugLock\rolePermissionModule\Http\Helpers;
 
 use Exception;
-use YourVendor\rolePermissionModule\Models\Role;
+use BugLock\rolePermissionModule\Models\AssignLocks;
 
 trait AssignLocksHelper
 {
@@ -41,7 +41,10 @@ trait AssignLocksHelper
                                 'permission_id' => $permission->id ?? null
                             ];
                         });
-                    });
+                    })->toArray();
+                                        
+                    // add combination in database 
+                    AssignLocks::insert($new_format);
                 }
             }
         } catch (Exception $err) {
@@ -49,6 +52,6 @@ trait AssignLocksHelper
             $this->reason = "Error in assignLocks Method " . $err->getMessage();
         }
 
-        dd($new_format);
+        // dd($new_format);
     }
 }

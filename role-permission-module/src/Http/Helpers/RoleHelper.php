@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace YourVendor\rolePermissionModule\Http\Helpers;
+namespace BugLock\rolePermissionModule\Http\Helpers;
 
 use Exception;
-use YourVendor\rolePermissionModule\Models\Role;
+use BugLock\rolePermissionModule\Models\Role;
 
 trait RoleHelper
 {
@@ -21,7 +21,7 @@ trait RoleHelper
             $new_format = $this->convertFormat($role);
 
             //add to database
-            // Role::insert($new_format);
+            Role::insert($new_format);
 
             $this->fails=false;
             $this->latest_roles = $role;

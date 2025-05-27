@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace YourVendor\rolePermissionModule\Http\Helpers;
+namespace BugLock\rolePermissionModule\Http\Helpers;
 
 use Exception;
-use YourVendor\rolePermissionModule\Models\Permission;
-use YourVendor\rolePermissionModule\Models\Role;
+use BugLock\rolePermissionModule\Models\Permission;
+use BugLock\rolePermissionModule\Models\Role;
 
 trait databaseHelper
 {

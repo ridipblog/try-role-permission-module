@@ -2,6 +2,6 @@
 
 return [
     'controllers' => [
-        'assign_role'=>'YourVendor\rolePermissionModule\Http\Controllers\Assign\RoleController.php'
+        'assign_role'=>'BugLock\rolePermissionModule\Http\Controllers\Assign\RoleController.php'
     ]
 ];

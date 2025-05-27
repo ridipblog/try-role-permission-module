@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\v1\TestController;
 use Illuminate\Support\Facades\Route;
 
-use YourVendor\rolePermissionModule\Root;
-use App\Http\Controllers\v1\TestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,19 +14,11 @@ use App\Http\Controllers\v1\TestController;
 |
 */
 
-Route::get('/', function (Root $root) {
-    return $root->check();
+Route::get('/', function () {
     return view('welcome');
 });
 
-// ---- Start test v1 routes ----
-Route::prefix('v1')->group(function () {
-    Route::get('/test-1',[TestController::class,"test1"]);
-
-    //Add new role
-    Route::get('add-role',[TestController::class,'checkRole']);
-    //list all roles
-    Route::get('/roles-list',[TestController::class,'roleList']);
+// Testing V1
+Route::prefix('v1')->group(function(){
+    Route::get('/test-1',[TestController::class,'check_1']);
 });
-
-// ---- End test v1 routes ----

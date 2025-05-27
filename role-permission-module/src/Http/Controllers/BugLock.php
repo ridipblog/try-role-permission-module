@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace YourVendor\rolePermissionModule\Http\Controllers;
+namespace BugLock\rolePermissionModule\Http\Controllers;
 
-use YourVendor\rolePermissionModule\Http\Helpers\AssignLocksHelper;
-use YourVendor\rolePermissionModule\Http\Helpers\Helper;
-use YourVendor\rolePermissionModule\Http\Helpers\PermissionHelper;
-use YourVendor\rolePermissionModule\Http\Helpers\RoleHelper;
+use BugLock\rolePermissionModule\Http\Helpers\AssignLocksHelper;
+use BugLock\rolePermissionModule\Http\Helpers\Helper;
+use BugLock\rolePermissionModule\Http\Helpers\PermissionHelper;
+use BugLock\rolePermissionModule\Http\Helpers\RoleHelper;
 
 class BugLock
 {

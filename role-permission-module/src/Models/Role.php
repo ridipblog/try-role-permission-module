@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\rolePermissionModule\Models;
+namespace BugLock\rolePermissionModule\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

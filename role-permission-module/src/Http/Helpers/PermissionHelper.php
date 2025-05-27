@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace YourVendor\rolePermissionModule\Http\Helpers;
+namespace BugLock\rolePermissionModule\Http\Helpers;
 
 use Exception;
-use YourVendor\rolePermissionModule\Models\Permission;
+use BugLock\rolePermissionModule\Models\Permission;
 
 trait PermissionHelper
 {
@@ -19,7 +19,7 @@ trait PermissionHelper
             $new_format = $this->convertFormat($permissions);
 
             //Add New Permission
-            // Permission::insert($new_format);
+            Permission::insert($new_format);
 
             $this->fails=false;
             $this->latest_permissions = $permissions;

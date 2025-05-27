@@ -23,11 +23,11 @@ trait RoleHelper
             //add to database
             // Role::insert($new_format);
 
-            $this->response['is_success'] = true;
+            $this->fails=false;
             $this->latest_roles = $role;
         } catch (Exception $err) {
-            $this->response['is_success'] = false;
-            $this->response['error'] = "{$err->getMessage()}";
+            $this->fails=true;
+            $this->reason="Error in createRole Method " . $err->getMessage();
             logger("Error in {$this->controller}: {$err->getMessage()}");
         }
     }

@@ -20,6 +20,12 @@ class BugLock
     public $latest_permissions = [];
     private $controller = null;
 
+    //global fail check
+    public $fails=false;
+
+    //global fail message
+    public $reason=null;
+
     //System Helper trait
     use Helper;
 
@@ -69,9 +75,9 @@ class BugLock
     //Start Assign Locks Section
 
     //Assign locks
-    public function assignedLocks(?array $roles = [], array $permissions = [])
+    public function assignedLocks(array $roles = [], array $permissions = [])
     {
-        $this->assignLocks();
+        $this->assignLocks($roles, $permissions);
     }
     //End Assign Locks Section
 

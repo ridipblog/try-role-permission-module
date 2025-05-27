@@ -1,0 +1,13 @@
+*** PRIVATE METHOD ***
+    
+*** PUBLIC METHOD  ***
+    1. getHolders()() -> 
+        1. getHolders() ->
+            A. SET MODEL ACCESS BY USED THIS METHOD 
+        2. where() 
+            A. ADD WHERE CONDITION (OPTIONAL IF ANY )
+
+
+    
+
+

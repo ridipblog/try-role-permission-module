@@ -21,11 +21,11 @@ trait PermissionHelper
             //Add New Permission
             // Permission::insert($new_format);
 
-            $this->response['is_success'] = true;
+            $this->fails=false;
             $this->latest_permissions = $permissions;
         } catch (Exception $err) {
-            $this->response['is_success'] = false;
-            $this->response['error'] = "{$err->getMessage()}";
+            $this->fails=true;
+            $this->reason="Error in createPermission method " . $err->getMessage();
             logger("Error in {$this->controller}: {$err->getMessage()}");
         }
     }

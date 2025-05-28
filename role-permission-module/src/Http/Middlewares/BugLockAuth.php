@@ -20,13 +20,7 @@ class BugLockAuth
      */
     public function handle(Request $request, Closure $next, string $guard = null, string $type = "view", string $check_active = "no"): Response
     {
-        $arr=[1,2,3];
-        $arr_2=[1,34,5];
-        if(count(array_intersect($arr,$arr_2))>0){
-            dd("Ok");
-        }else{
-            dd("Not Ok");
-        }
+        
         $error_message = null;
         $auth_helper = null;
         try {

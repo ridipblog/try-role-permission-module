@@ -6,6 +6,7 @@ namespace BugLock\rolePermissionModule\Http\Helpers;
 
 use Exception;
 use BugLock\rolePermissionModule\Models\AssignLocks;
+use BugLock\rolePermissionModule\Models\UserRoles;
 
 trait AssignLocksHelper
 {
@@ -54,4 +55,5 @@ trait AssignLocksHelper
 
         // dd($new_format);
     }
+    
 }

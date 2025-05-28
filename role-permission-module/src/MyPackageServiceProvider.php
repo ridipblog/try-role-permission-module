@@ -32,6 +32,12 @@ class MyPackageServiceProvider extends ServiceProvider
 
             //Load all middleware (Set as alise middleware )
             $router=$this->app['router'];
+
+            //Load Auth middleware 
             $router->aliasMiddleware('buglock.auth',\BugLock\rolePermissionModule\Http\Middlewares\BugLockAuth::class);
+
+            //Load Role middleware
+            $router->aliasMiddleware('buglock.role',\BugLock\rolePermissionModule\Http\Middlewares\BugLockRole::class);
+
     }
 }

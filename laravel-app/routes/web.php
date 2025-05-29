@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::get('/login',[TestController::class,'login']);
 Route::get('/logout',[TestController::class,'logout']);
+Route::get('/register',[TestController::class,'register']);
 // Testing V1
 Route::prefix('v1')->group(function(){
     Route::get('/test-1',[TestController::class,'check_1']);
@@ -29,6 +30,6 @@ Route::group(['prefix'=>'v1','middleware'=>['buglock.auth:web,view,yes']],functi
     Route::get('/dash-1',[TestController::class,'dash_1']);
 });
 
-Route::group(['prefix'=>'v1','middleware'=>['buglock.role:,,,']],function(){
+Route::group(['prefix'=>'v1','middleware'=>['buglock.role:web,view,admin-1,admin-2']],function(){
     Route::get('/dash-2',[TestController::class,'dash_2']);
 });

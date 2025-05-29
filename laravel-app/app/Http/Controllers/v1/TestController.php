@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use BugLock\rolePermissionModule\Http\Controllers\BugLock;
+use BugLock\rolePermissionModule\Models\UserRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class TestController extends Controller
 {
@@ -22,7 +25,7 @@ class TestController extends Controller
     public function check_1(Request $request)
     {
         $bug_lock = new BugLock();
-        $bug_lock->createRole('admin-3', 'admin-4');
+        $bug_lock->createRole('admin-1', 'admin-2');
         $bug_lock->createPermission('edit-resume-1', 'remove-resume-2');
         $bug_lock->assignedLocks();
         dd($bug_lock);
@@ -32,6 +35,19 @@ class TestController extends Controller
         dd(Auth::user());
     }
     public function dash_2(Request $request){
-        dd($request->logged_user);
+
+    }
+    public function register(Request $request){
+        // $user=User::create([
+        //     'name'=>'coder 1',
+        //     'email'=>'coder1',
+        //     'password'=>Hash::make('password')
+        // ]);
+        $user=User::where('name','coder 1')
+        ->first();
+        $user->assignRoleToUser('admin-1');
+        if($user->fails){
+            dd($user->reason);
+        }
     }
 }

@@ -9,7 +9,7 @@ class MyPackageServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/codes.php', 'role-permission-codes');
+        $this->mergeConfigFrom(__DIR__ . '/config/buglocks.php', 'buglocks');
         logger('Module registered ');
     }
 
@@ -19,10 +19,12 @@ class MyPackageServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         //Publish package config files in laravel-app/config folder
-        //publish command -> php artisan vendor:publish --tag=role-permission-config
+        //publish command -> php artisan vendor:publish --tag=buglocks-config
+        // OR
+        // php artisan vendor:publish --provider="BugLock\rolePermissionModule\MyPackageServiceProvider" --tag=buglocks-config
         $this->publishes([
-            __DIR__ . '/config/codes.php' => config_path('codes.php')
-        ], 'role-permission-config');
+            __DIR__ . '/config/buglocks.php' => config_path('buglocks.php')
+        ], 'buglocks-config');
 
         //Publish package config files in laravel-app/app/models folder
         //publish command -> php artisan vendor:publish --tag=role-permissions-models

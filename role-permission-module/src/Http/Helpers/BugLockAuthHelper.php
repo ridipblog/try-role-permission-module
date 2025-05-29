@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace  BugLock\rolePermissionModule\Http\Helpers;
 
 use BugLock\rolePermissionModule\Models\Role;
+use BugLock\rolePermissionModule\Models\UserRoles;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,10 +14,12 @@ class BugLockAuthHelper
     public $process;
     public $auth_message;
     public $auth_user;
+    public $auth_info;
     public function __construct($guard = null)
     {
         $this->process = true;
         $this->auth_user = Auth::guard($guard == "web" ? null : $guard);
+        $this->auth_info = $this->auth_user->user();
     }
     // -------------- check logged in ------------
     public function isAuthorized()
@@ -23,7 +28,7 @@ class BugLockAuthHelper
             $this->process = true;
         } else {
             $this->process = false;
-            $this->auth_message = "You are not logged in !";
+            $this->auth_message = config('buglocks.middleware.error.unauthorized');
         }
         return $this;
     }
@@ -31,27 +36,41 @@ class BugLockAuthHelper
     public function checkActiveUser()
     {
         if ($this->process) {
-            if ($this->auth_user->user()->status == 1) {
+            if ($this->auth_info?->status == 1) {
                 $this->process = true;
             } else {
                 $this->process = false;
-                $this->auth_message = "Your account is deatived !";
+                $this->auth_message = config('buglocks.middleware.error.unauthorized-active');
             }
         }
         return $this;
     }
 
     // -----------------  check given roles with logged user role ------------------
-    public function isAuthorizedRole($given_roles)
+    public function isAuthorizedRole(array $given_roles)
     {
-        // dd($role_name);
         if ($this->process) {
-            $given_roles_id = Role::select('id')
-                ->whereIn('name', $given_roles)
-                ->get()
-                ->pluck('id')
-                ->toArray();
-            dd($given_roles_id);
+            $one_to_many_role = config('buglocks.one-to-many-man');
+
+            $query = UserRoles::query()
+                ->with(['roles'])
+                ->select('role_id')
+                ->where('user_id', $this->auth_info[config('buglocks.primary_key')] ?? null);
+
+            if ($one_to_many_role) {
+                $user_roles = $query->get()->pluck('roles.name')->toArray();
+                if (empty(array_intersect($user_roles, $given_roles))) {
+                    $this->process = false;
+                    $this->auth_message = config('buglocks.middleware.error.unauthorized-role');
+                }
+            } else {
+                $user_role = $query
+                    ->first()?->roles?->name;
+                if (!in_array($user_role, $given_roles)) {
+                    $this->process = false;
+                    $this->auth_message = config('buglocks.middleware.error.unauthorized-role');
+                }
+            }
         }
         return $this;
     }

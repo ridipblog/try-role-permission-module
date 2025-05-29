@@ -46,6 +46,7 @@ class TestController extends Controller
         $user=User::where('name','coder 1')
         ->first();
         $user->assignRoleToUser('admin-1');
+        $user->assignRoleToUser('admin-2');
         if($user->fails){
             dd($user->reason);
         }

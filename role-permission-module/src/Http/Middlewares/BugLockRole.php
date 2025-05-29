@@ -19,11 +19,10 @@ class BugLockRole
     public function handle(Request $request, Closure $next, string $guard = "web",string $type="view", ...$given_roles): Response
     {
         $auth_helper = null;
-        $isOneToMany=config('buglocks.one-to-many-man');
-        dd($isOneToMany);
         try {
             $auth_helper = new BugLockAuthHelper($guard);
-            $auth_helper->isAuthorized();
+            $auth_helper->isAuthorized()
+            ->isAuthorizedRole($given_roles);
         } catch (Exception $err) {
             dd($err->getMessage());
         }

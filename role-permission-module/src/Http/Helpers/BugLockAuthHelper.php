@@ -51,7 +51,6 @@ class BugLockAuthHelper
     {
         if ($this->process) {
             $one_to_many_role = config('buglocks.one-to-many-man');
-
             $query = UserRoles::query()
                 ->with(['roles'])
                 ->select('role_id')
@@ -75,7 +74,21 @@ class BugLockAuthHelper
         return $this;
     }
     // -------------- get roles and permission by user ---------------
-    public static function isAuthorizedPermission() {}
+    public function isAuthorizedPermission(array $given_permissions) {
+        if($this->process){
+            $one_to_many_role = config('buglocks.one-to-many-man');
+            $query=UserRoles::select('role_id')
+            ->where('user_id', $this->auth_info[config('buglocks.primary_key')] ?? null);
+            if($one_to_many_role){
+                $user_roles=$query->pluck('role_id')
+                ->toArray();
+                dd($user_roles);
+            }else{
+                $user_role=$query->first()?->role_id;
+            }
+        }
+        return $this;
+    }
 
     // ***** return process *****
     public function returnProcess($type)

@@ -37,6 +37,12 @@ class TestController extends Controller
     public function dash_2(Request $request){
 
     }
+
+    public function dash_3(Request $request){
+
+    }
+
+
     public function register(Request $request){
         // $user=User::create([
         //     'name'=>'coder 1',

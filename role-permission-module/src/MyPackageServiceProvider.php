@@ -41,5 +41,8 @@ class MyPackageServiceProvider extends ServiceProvider
             //Load Role middleware
             $router->aliasMiddleware('buglock.role',\BugLock\rolePermissionModule\Http\Middlewares\BugLockRole::class);
 
+            //Load Permission middleware 
+            $router->aliasMiddleware('buglock.permission',\BugLock\rolePermissionModule\Http\Middlewares\BugLockPermission::class);
+
     }
 }

@@ -23,5 +23,5 @@ return [
     'guard' => 'web',
 
     //If user have multiple roles 
-    'one-to-many-man' => false
+    'one-to-many-man' => true
 ];

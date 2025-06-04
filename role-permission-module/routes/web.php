@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+// routes/web.php or inside your service provider
+Route::group([
+    'middleware' => 'web',
+    'prefix' => 'buglocks',
+], function () {
 
-Route::group(['prefix' => 'buglocks'], function () {
-
-    // ***** all routes of protfolio *****
     require __DIR__ . '/package.php';
 
-    // ***** all routes of authorization *****
-    require __DIR__ .'/errors.php';
-
+    // ***** all errors routes *****
+    require __DIR__ . '/errors.php';
 });

@@ -63,9 +63,7 @@
   <div class="permission-container">
     <div class="permission-icon">🔐</div>
     <div class="permission-title">Permission Denied</div>
-    <p class="permission-desc">
-      You don't have the required permission to access this page or perform this action.
-    </p>
+    <p class="permission-desc">{{ session('message') ?? config('buglocks.middleware.error.unauthorized-permission')}}</p>
     <a href="/contact-admin" class="btn btn-request">Request Access</a>
   </div>
 

@@ -18,21 +18,23 @@ class BugLockAuth
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string $guard = null, string $type = "view", string $check_active = "no"): Response
+    public function handle(Request $request, Closure $next, string $guard = 'web', string $type = "view", string $check_active = "no"): Response
     {
         $auth_helper = null;
-        
+
         try {
             $auth_helper = new BugLockAuthHelper($guard);
             $auth_helper->isAuthorized();
-            if($check_active==="yes"){
+            if ($check_active === "yes") {
                 $auth_helper->checkActiveUser();
             }
         } catch (Exception $err) {
-            dd($err->getMessage());
+            $auth_helper->auth_message=config('buglocks.middleware.error.server-error');
         }
         // ***** return process if any unauthorization *****
-        $auth_helper->returnProcess($type,'auth');
+        if (!$auth_helper->process) {
+            return $auth_helper->returnProcess($type);
+        }
 
         return $next($request);
     }

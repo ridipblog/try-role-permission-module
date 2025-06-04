@@ -62,7 +62,7 @@
       🚫
     </div>
     <div class="unauth-message">Access Denied</div>
-    <p class="unauth-desc">Your account does not have the necessary role to view this page.</p>
+    <p class="unauth-desc">{{ session('message') ?? config('buglocks.middleware.error.unauthorized-role') }}</p>
     <a href="/" class="btn btn-contact">Return to Home</a>
   </div>
 

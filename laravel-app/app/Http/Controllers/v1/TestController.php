@@ -32,7 +32,7 @@ class TestController extends Controller
     }
 
     public function dash_1(Request $request){
-        dd(Auth::user());
+        dd(Auth::guard('web')->user());
     }
     public function dash_2(Request $request){
         dd("OK");

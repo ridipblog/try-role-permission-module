@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace BugLock\rolePermissionModule\Http\Middlewares;
@@ -16,19 +17,21 @@ class BugLockPermission
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string $guard = "web",string $type="view", ...$given_permissions): Response
+    public function handle(Request $request, Closure $next, string $guard = "web", string $type = "view", ...$given_permissions): Response
     {
         $auth_helper = null;
         try {
             $auth_helper = new BugLockAuthHelper($guard);
             $auth_helper->isAuthorized()
-            ->isAuthorizedPermission($given_permissions);
+                ->isAuthorizedPermission($given_permissions);
         } catch (Exception $err) {
-            dd($err->getMessage());
+            $auth_helper->auth_message=config('buglocks.middleware.error.server-error');
         }
         // ***** return process if any unauthorization *****
-        $auth_helper->returnProcess($type,'permissions');
-        
+        if (!$auth_helper->process) {
+            return $auth_helper->returnProcess($type);
+        }
+
         return $next($request);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace BugLock\rolePermissionModule\Http\Middlewares;
@@ -16,35 +17,23 @@ class BugLockRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string $guard = "web",string $type="view", ...$given_roles): Response
+    public function handle(Request $request, Closure $next, string $guard = "web", string $type = "view", ...$given_roles): Response
     {
         $auth_helper = null;
         try {
             $auth_helper = new BugLockAuthHelper($guard);
             $auth_helper->isAuthorized()
-            ->isAuthorizedRole($given_roles);
+                ->isAuthorizedRole($given_roles);
         } catch (Exception $err) {
-            dd($err->getMessage());
+            $auth_helper->auth_message=config('buglocks.middleware.error.server-error');
         }
 
         // ***** return process if any unauthorization *****
-        // $auth_helper->returnProcess($type,'role');
-
-        if ($type === "view") {
-            if (!$auth_helper->process) {
-                return redirect()->route('buglocks.error', ['page' => 'role']);
-            }
-        } else if ($type === "api") {
-            if (!$auth_helper->process) {
-                return response()->json([
-                    'status' => 401,
-                    'message' => $auth_helper->auth_message ?? null
-                ], 401);
-            }
-        } else {
-            throw new Exception("Type must be view or api");
+        if (!$auth_helper->process) {
+            return $auth_helper->returnProcess($type);
         }
-        
+
+
         return $next($request);
     }
 }

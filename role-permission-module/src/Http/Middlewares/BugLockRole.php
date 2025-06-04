@@ -26,8 +26,24 @@ class BugLockRole
         } catch (Exception $err) {
             dd($err->getMessage());
         }
+
         // ***** return process if any unauthorization *****
-        $auth_helper->returnProcess($type);
+        // $auth_helper->returnProcess($type,'role');
+
+        if ($type === "view") {
+            if (!$auth_helper->process) {
+                return redirect()->route('buglocks.error', ['page' => 'role']);
+            }
+        } else if ($type === "api") {
+            if (!$auth_helper->process) {
+                return response()->json([
+                    'status' => 401,
+                    'message' => $auth_helper->auth_message ?? null
+                ], 401);
+            }
+        } else {
+            throw new Exception("Type must be view or api");
+        }
         
         return $next($request);
     }

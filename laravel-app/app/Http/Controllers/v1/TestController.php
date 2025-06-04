@@ -35,7 +35,7 @@ class TestController extends Controller
         dd(Auth::user());
     }
     public function dash_2(Request $request){
-
+        dd("OK");
     }
 
     public function dash_3(Request $request){

@@ -27,7 +27,7 @@ class BugLockPermission
             dd($err->getMessage());
         }
         // ***** return process if any unauthorization *****
-        $auth_helper->returnProcess($type);
+        $auth_helper->returnProcess($type,'permissions');
         
         return $next($request);
     }

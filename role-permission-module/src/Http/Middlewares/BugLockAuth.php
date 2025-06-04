@@ -21,6 +21,7 @@ class BugLockAuth
     public function handle(Request $request, Closure $next, string $guard = null, string $type = "view", string $check_active = "no"): Response
     {
         $auth_helper = null;
+        
         try {
             $auth_helper = new BugLockAuthHelper($guard);
             $auth_helper->isAuthorized();
@@ -31,7 +32,7 @@ class BugLockAuth
             dd($err->getMessage());
         }
         // ***** return process if any unauthorization *****
-        $auth_helper->returnProcess($type);
+        $auth_helper->returnProcess($type,'auth');
 
         return $next($request);
     }

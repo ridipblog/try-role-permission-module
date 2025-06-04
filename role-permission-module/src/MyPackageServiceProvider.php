@@ -32,17 +32,26 @@ class MyPackageServiceProvider extends ServiceProvider
             ->flatMap(fn($file) => [$file->getPathname() => app_path('Models/' . $file->getFilename())])
             ->toArray(), 'role-permissions-models');
 
-            //Load all middleware (Set as alise middleware )
-            $router=$this->app['router'];
+        //Load all middleware (Set as alise middleware )
+        $router = $this->app['router'];
 
-            //Load Auth middleware 
-            $router->aliasMiddleware('buglock.auth',\BugLock\rolePermissionModule\Http\Middlewares\BugLockAuth::class);
+        //Load Auth middleware 
+        $router->aliasMiddleware('buglock.auth', \BugLock\rolePermissionModule\Http\Middlewares\BugLockAuth::class);
 
-            //Load Role middleware
-            $router->aliasMiddleware('buglock.role',\BugLock\rolePermissionModule\Http\Middlewares\BugLockRole::class);
+        //Load Role middleware
+        $router->aliasMiddleware('buglock.role', \BugLock\rolePermissionModule\Http\Middlewares\BugLockRole::class);
 
-            //Load Permission middleware 
-            $router->aliasMiddleware('buglock.permission',\BugLock\rolePermissionModule\Http\Middlewares\BugLockPermission::class);
+        //Load Permission middleware 
+        $router->aliasMiddleware('buglock.permission', \BugLock\rolePermissionModule\Http\Middlewares\BugLockPermission::class);
 
+        //Load all routes
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+
+        //Load errors pages 
+        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'buglocksviews');
+        //Publish all errors pages 
+        // $this->publishes([
+        //     __DIR__ . '/../resources/views/settings/errors' => resource_path('views/vendor/yourpackage'),
+        // ], 'yourpackage-views');
     }
 }

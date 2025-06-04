@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace  BugLock\rolePermissionModule\Http\Helpers;
 
+use BugLock\rolePermissionModule\Models\AssignLocks;
 use BugLock\rolePermissionModule\Models\Role;
 use BugLock\rolePermissionModule\Models\UserRoles;
 use Exception;
@@ -50,62 +51,51 @@ class BugLockAuthHelper
     public function isAuthorizedRole(array $given_roles)
     {
         if ($this->process) {
-            $one_to_many_role = config('buglocks.one-to-many-man');
-            $query = UserRoles::query()
-                ->with(['roles'])
-                ->select('role_id')
-                ->where('user_id', $this->auth_info[config('buglocks.primary_key')] ?? null);
 
-            if ($one_to_many_role) {
-                $user_roles = $query->get()->pluck('roles.name')->toArray();
-                if (empty(array_intersect($user_roles, $given_roles))) {
-                    $this->process = false;
-                    $this->auth_message = config('buglocks.middleware.error.unauthorized-role');
-                }
-            } else {
-                $user_role = $query
-                    ->first()?->roles?->name;
-                if (!in_array($user_role, $given_roles)) {
-                    $this->process = false;
-                    $this->auth_message = config('buglocks.middleware.error.unauthorized-role');
-                }
+            $user_id = $this->auth_info[config('buglocks.primary_key')] ?? null;
+
+            $check_roles = UserRoles::query()
+                ->where('user_id', $user_id)
+                ->whereHas('roles', function ($query) use ($given_roles) {
+                    $query->whereIn('name', $given_roles);
+                })->exists();
+
+            if (!$check_roles) {
+                $this->process = false;
+                $this->auth_message = config('buglocks.middleware.error.unauthorized-role');
             }
         }
         return $this;
     }
     // -------------- get roles and permission by user ---------------
-    public function isAuthorizedPermission(array $given_permissions) {
-        if($this->process){
-            $one_to_many_role = config('buglocks.one-to-many-man');
-            $query=UserRoles::select('role_id')
-            ->where('user_id', $this->auth_info[config('buglocks.primary_key')] ?? null);
-            if($one_to_many_role){
-                $user_roles=$query->pluck('role_id')
-                ->toArray();
-                dd($user_roles);
-            }else{
-                $user_role=$query->first()?->role_id;
+    public function isAuthorizedPermission(array $given_permissions)
+    {
+        if ($this->process) {
+            $user_id = $this->auth_info[config('buglocks.primary_key')] ?? null;
+
+            $check_permissios = AssignLocks::query()
+                ->whereIn('role_id', function ($query) use ($user_id) {
+                    $query->select('role_id')
+                        ->from('user_roles')
+                        ->where('user_id', $user_id);
+                })
+                ->whereHas('permissions', function ($query) use ($given_permissions) {
+                    $query->whereIn('name', $given_permissions);
+                })->exists();
+
+            if (!$check_permissios) {
+                $this->process = false;
+                $this->auth_message = config('buglocks.middleware.error.unauthorized-permission');
             }
         }
         return $this;
     }
 
     // ***** return process *****
-    public function returnProcess($type)
+    public function returnProcess($type, $page = 'auth')
     {
-        if ($type === "view") {
-            if (!$this->process) {
-                dd($this->auth_message);
-            }
-        } else if ($type === "api") {
-            if (!$this->process) {
-                return response()->json([
-                    'status' => 401,
-                    'message' => $this->auth_message ?? null
-                ], 401);
-            }
-        } else {
-            throw new Exception("Type must be view or api");
-        }
+
+        
+        
     }
 }

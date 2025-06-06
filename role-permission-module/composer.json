@@ -12,7 +12,7 @@
     "extra": {
       "laravel": {
         "providers": [
-          "BugLock\\rolePermissionModule\\MyPackageServiceProvider"
+          "BugLock\\rolePermissionModule\\BuglockServiceProvider"
         ]
       }
     }

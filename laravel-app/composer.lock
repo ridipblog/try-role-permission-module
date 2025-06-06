@@ -72,13 +72,13 @@
             "dist": {
                 "type": "path",
                 "url": "../role-permission-module",
-                "reference": "2c085b62825d926b602cffb94ae993665821c440"
+                "reference": "4fc0143153c34dbb1c88505b0f0993a2348adf99"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "BugLock\\rolePermissionModule\\MyPackageServiceProvider"
+                        "BugLock\\rolePermissionModule\\BuglockServiceProvider"
                     ]
                 }
             },

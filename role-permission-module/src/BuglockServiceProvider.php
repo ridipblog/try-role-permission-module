@@ -5,7 +5,7 @@ namespace BugLock\rolePermissionModule;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 
-class MyPackageServiceProvider extends ServiceProvider
+class BuglockServiceProvider extends ServiceProvider
 {
     public function register()
     {
@@ -21,7 +21,7 @@ class MyPackageServiceProvider extends ServiceProvider
         //Publish package config files in laravel-app/config folder
         //publish command -> php artisan vendor:publish --tag=buglocks-config
         // OR
-        // php artisan vendor:publish --provider="BugLock\rolePermissionModule\MyPackageServiceProvider" --tag=buglocks-config
+        // php artisan vendor:publish --provider="BugLock\rolePermissionModule\BuglockServiceProvider" --tag=buglocks-config
         $this->publishes([
             __DIR__ . '/config/buglocks.php' => config_path('buglocks.php')
         ], 'buglocks-config');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e09066f12cb565571d5d78dccc70ac99",
+    "content-hash": "53dc6785dbb08da6db636eab936cba83",
     "packages": [
         {
             "name": "brick/math",
@@ -68,11 +68,17 @@
         },
         {
             "name": "buglock/rolepermissionmodule",
-            "version": "dev-windows",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ridipblog/buglocks.git",
+                "reference": "cd8d06b34364a5f21a2195442d8210a92bf293b8"
+            },
             "dist": {
-                "type": "path",
-                "url": "../role-permission-module",
-                "reference": "4fc0143153c34dbb1c88505b0f0993a2348adf99"
+                "type": "zip",
+                "url": "https://api.github.com/repos/ridipblog/buglocks/zipball/cd8d06b34364a5f21a2195442d8210a92bf293b8",
+                "reference": "cd8d06b34364a5f21a2195442d8210a92bf293b8",
+                "shasum": ""
             },
             "type": "library",
             "extra": {
@@ -87,10 +93,16 @@
                     "BugLock\\rolePermissionModule\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                ""
+            ],
             "description": "A Role and Permission manement module",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/ridipblog/buglocks/issues",
+                "source": "https://github.com/ridipblog/buglocks/tree/v1.0.0"
+            },
+            "time": "2025-06-06T14:39:43+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -8149,14 +8161,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "buglock/rolepermissionmodule": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
